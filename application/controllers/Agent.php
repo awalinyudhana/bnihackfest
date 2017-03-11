@@ -318,5 +318,20 @@ class Agent extends REST_Controller
         );
     }
 
+    public function collect_history_get($id)
+    {
+        $this->db->from('collects c');
+        $this->db->join('users u', 'u.user_id = c.user_id');
+        $this->db->where('agent_id', $id);
+        $items = $this->db->get()->result_array();
+
+        $return = [
+            'status' => true,
+            'data' => $items
+        ];
+
+        $this->set_response($return, REST_Controller::HTTP_OK);
+    }
+
 
 }

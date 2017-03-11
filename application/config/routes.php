@@ -81,6 +81,7 @@ $route['agent/withdrawals-pending'] = "Agent/withdrawal_pending_lists";
 $route['agent/withdrawals-done'] = "Agent/withdrawal_done_lists";
 $route['agent/withdrawal'] = "Agent/withdrawal";
 $route['agent/collect'] = "Agent/collect";
+$route['agent/history/(:num'] = "Agent/collect_history/$1";
 
 //$route['agent/transfer'] = "Agent/transfer";
 $route['trash'] = "Users/trash";
