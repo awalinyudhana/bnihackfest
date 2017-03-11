@@ -390,7 +390,6 @@ class Users extends REST_Controller
 
     public function withdrawal_post(){
 
-        $this->form_validation->set_rules('agent_id', 'Agent', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Jumlah Tarik Tunai', 'required|integer');
 
         if ($this->form_validation->run() == FALSE)
@@ -404,21 +403,8 @@ class Users extends REST_Controller
 
 
         $user_id = $this->input->post('user_id');
-        $agent_id = $this->input->post('agent_id');
         $amount = $this->input->post('amount');
 
-        $agent = $this->db->get_where('agent', [
-            'agent_id' => $agent_id
-        ])->row();
-
-        if (is_null($agent))
-            $this->set_response(
-                [
-                    'status' => false,
-                    'message' => 'agent tidak ditemukan'
-                ],
-                REST_Controller::HTTP_OK
-            );
 
         $user = $this->db->get_where('users', [
             'user_id' => $user_id
@@ -442,21 +428,20 @@ class Users extends REST_Controller
                 REST_Controller::HTTP_OK
             );
 
+        $stamp = date("Ymdhis");
+
+        $code = substr((string) $stamp, - 6);
+
         $this->db->insert('withdrawal', [
             'user_id' => $user_id,
-            'agent_id' => $agent_id,
-            'status' => false
+            'status' => false,
+            'code' => $code,
         ]);
-
-
-        $agent = $this->db->get_where('agent', [
-            'agent_id' => $agent_id
-        ])->row();
 
         $this->set_response(
             [
                 'status' => true,
-                'data' => $agent
+                'code' => $code
             ],
             REST_Controller::HTTP_OK
         );

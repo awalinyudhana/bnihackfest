@@ -70,9 +70,9 @@ $route['user/pickup-status/(:num)'] = "Users/pickup_status/$1";
 $route['user/merchandise'] = "Users/merchandise";
 $route['user/redeem'] = "Users/redeem";
 $route['user/redeems/(:num)'] = "Users/redeems/$1";
+$route['user/withdrawal'] = "Users/withdrawal";
 $route['user/change-balance'] = "Users/change_balance";
 $route['user/transfer'] = "Users/transfer";
-$route['user/withdrawal'] = "Users/withdrawal";
 
 
 $route['agent/login'] = "Agent/login";
