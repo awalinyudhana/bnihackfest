@@ -435,7 +435,7 @@ class Users extends REST_Controller
 
         $code = substr((string) $stamp, - 6);
 
-        $this->db->insert('withdrawal', [
+        $this->db->insert('withdrawals', [
             'user_id' => $user_id,
             'status' => false,
             'code' => $code,
