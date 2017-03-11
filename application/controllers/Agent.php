@@ -303,9 +303,11 @@ class Agent extends REST_Controller
             [
                 'status' => true,
                 'balance' => $agent_new_amount,
-                'commission' => $commission,
-                'transfer_balance' => $total - $commission,
+                'trash_price' => $price,
+                'trash_weight' => $weight,
                 'trash_value' => $total,
+                'commission' => $commission,
+                'transfer_balance' => $total - $commission
             ],
             REST_Controller::HTTP_OK
         );
