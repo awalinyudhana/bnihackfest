@@ -249,7 +249,7 @@ class Agent extends REST_Controller
             );
 
         $price = $trash->price;
-        $total = (int) $price + (float) $weight;
+        $total = (int) $price * (float) $weight;
         $commission = 0.08 * $total;
         $point = floor($total/1000);
 
