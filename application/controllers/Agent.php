@@ -72,7 +72,10 @@ class Agent extends REST_Controller
 
     public function pickup_lists_get($id)
     {
-        $items = $this->db->get_where('pickups', ['status' => false, 'agent_id' => $id])->result_array();
+        $this->db->from('pickups p');
+        $this->db->join('users u', 'u.user_id = p.user_id');
+        $this->db->where('agent_id', $id);
+        $items = $this->db->get()->result_array();
 
         $this->set_response($items, REST_Controller::HTTP_OK);
     }
