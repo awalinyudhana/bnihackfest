@@ -104,9 +104,25 @@ class Agent extends REST_Controller
 
     }
 
-    public function withdrawal_pending_lists_get($id)
+    public function withdrawal_by_code_get($code)
     {
-        $data = $this->db->get_where('withdrawals', ['status' => false, 'agent_id' => $id])->result_array();
+
+        $this->db->from('withdrawals w');
+        $this->db->join('users u', 'u.user_id = w.user_id');
+        $this->db->where('code', $code);
+        $this->db->where('status', false);
+
+        $data = $this->db->get()->row_array();
+
+        if (is_null($data))
+            $this->set_response(
+                [
+                    'status' => false,
+                    'message' => 'data tidak ditemukan'
+                ],
+                REST_Controller::HTTP_OK
+            );
+
         $return = [
             'status' => true,
             'data' => $data
@@ -139,6 +155,7 @@ class Agent extends REST_Controller
 
 
         $id = $this->input->post('id');
+        $agent_id = $this->input->post('agent_id');
         $pin = $this->input->post('pin');
 
         $withdrawal = $this->db->get_where('withdrawals', [
@@ -170,7 +187,7 @@ class Agent extends REST_Controller
             );
 
         $agent = $this->db->get_where('agents', [
-            'agent_id' => $withdrawal->agent_id
+            'agent_id' => $agent_id
         ])->row();
 
         if ((int) $agent->balance < (int) $withdrawal->amount)
@@ -184,7 +201,8 @@ class Agent extends REST_Controller
 
         $commission = (int) $withdrawal->amount * 0.1 ;
 
-        $this->db->update('withdrawals', ['status'=> true, 'commission' => $commission], ['withdrawal_id' => $id]);
+        $this->db->update('withdrawals', ['status'=> true, 'commission' => $commission, 'agent_id' => $agent_id],
+            ['withdrawal_id' => $id]);
 
         $user_new_amount = (int) $user->balance - (int) $withdrawal->amount;
         $agent_new_amount = (int) $agent->balance + $commission;

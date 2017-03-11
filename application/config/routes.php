@@ -73,19 +73,16 @@ $route['user/change-balance'] = "Users/change_balance";
 $route['user/transfer'] = "Users/transfer";
 $route['user/withdrawal'] = "Users/withdrawal";
 
+
 $route['agent/login'] = "Agent/login";
-$route['agent/(:num)'] = "Agent/by_id/$1";
 $route['agent/deposit'] = "Agent/deposit";
+$route['agent/(:num)'] = "Agent/by_id/$1";
+
 $route['agent/pickup-lists/(:num)'] = "Agent/pickup_lists/$1";
-$route['agent/withdrawals-pending/(:num)'] = "Agent/withdrawal_pending_lists/$1";
 $route['agent/withdrawals-done/(:num)'] = "Agent/withdrawal_done_lists/$1";
+$route['agent/withdrawal-by-code/(:num)'] = "Agent/withdrawal_by_code/$1";
 $route['agent/withdrawal'] = "Agent/withdrawal";
 $route['agent/collect'] = "Agent/collect";
 $route['agent/collect-history/(:num'] = "Agent/collect_history/$1";
 $route['agent/user-by-phone'] = "Agent/user_by_phone";
-
-//$route['agent/transfer'] = "Agent/transfer";
-$route['trash'] = "Users/trash";
-
-
 $route['trash'] = "Users/trash";
