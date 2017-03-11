@@ -235,7 +235,7 @@ class Agent extends REST_Controller
                 REST_Controller::HTTP_OK
             );
 
-        $trash = $this->db->get_where('users', [
+        $trash = $this->db->get_where('trash', [
             'trash_id' => $trash_id,
         ])->row();
 
