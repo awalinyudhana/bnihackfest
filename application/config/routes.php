@@ -70,6 +70,8 @@ $route['user/merchandise'] = "Users/merchandise";
 $route['user/redeem'] = "Users/redeem";
 $route['user/redeems'] = "Users/redeems";
 $route['user/change-balance'] = "Users/change_balance";
+$route['user/transfer'] = "Users/transfer";
+$route['user/withdrawal'] = "Users/withdrawal";
 
 $route['agent/login'] = "Agent/login";
 $route['agent/(:num)'] = "Agent/by_id/$1";
