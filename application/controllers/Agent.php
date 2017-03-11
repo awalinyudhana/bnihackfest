@@ -333,5 +333,29 @@ class Agent extends REST_Controller
         $this->set_response($return, REST_Controller::HTTP_OK);
     }
 
+    public function user_by_phone_post()
+    {
+
+        $this->form_validation->set_rules('phone', 'No Telepon', 'trim|required|is_natural');
+
+        if ($this->form_validation->run() == FALSE)
+            $this->set_response(
+                [
+                    'status' => false,
+                    'message' => validation_errors()
+                ],
+                REST_Controller::HTTP_BAD_REQUEST
+            );
+        
+        $user = $this->db->get_where('users', ['user_id' => $this->input->post('phone')])->row_array();
+        $user['profile_path'] = site_url('uploads/'. $user['profile']);
+
+        $return = [
+            'status' => true,
+            'data' => $user
+        ];
+        $this->set_response($return, REST_Controller::HTTP_OK);
+    }
+
 
 }
