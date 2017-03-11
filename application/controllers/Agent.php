@@ -282,7 +282,7 @@ class Agent extends REST_Controller
         $cost = (int) ($commission + $biaya);
         $transfer_balance = (int) $total - $cost;
 
-        $user_new_amount = (int) $user->balance + $transfer_balance);
+        $user_new_amount = (int) $user->balance + $transfer_balance;
 
         $user_new_point = (int) $user->point + (int) $point;
 
