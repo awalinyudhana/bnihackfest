@@ -70,13 +70,79 @@ class Users extends REST_Controller
         $this->set_response($return, REST_Controller::HTTP_OK);
     }
 
-    public function pickup_get($id)
+    public function pickup_post()
     {
-        $this->db->update('users', ['alert' => true], ['user_id' => $id]);
+        $id = $this->input->post('id');
+
+        $this->db->delete('pickups', array('user_id' => $id));
+
+        $pickup = [
+            'user_id' => $id,
+            'status' => FALSE
+        ];
+
+        $this->db->insert('pickups', $pickup);
+
+        $pickup_id = $this->db->insert_id();;
+
+        $trash = $this->input->post('trash_id');
+
+        foreach ($trash as $item)
+        {
+            $pickup_detail = [
+                'pickup_id' => $pickup_id,
+                'trash_id' => $item
+            ];
+
+            $this->db->insert('pickups_detail ', $pickup_detail);
+        }
+
         $return = [
             'status' => true,
+            'pickup_id' => $pickup_id
         ];
         $this->set_response($return, REST_Controller::HTTP_OK);
+
+
+    }
+
+    public function pickups_get($id)
+    {
+
+        $data = $this->db->get_where('pickups', ['user_id' => $id])->result_array();
+        $return = [
+            'status' => true,
+            'pickup_id' => $data
+        ];
+        $this->set_response($return, REST_Controller::HTTP_OK);
+
+    }
+
+    public function pickup_detail_get($id)
+    {
+        $pickup = $this->db->get_where('pickups', ['pickup_id' => $id])->row_array();
+
+        if(is_null($pickup))
+            $this->set_response(
+                [
+                    'status' => false,
+                    'message' => 'data tidak ditemukan'
+                ],
+                REST_Controller::HTTP_BAD_REQUEST
+            );
+
+
+        $pickup_detail = $this->db->get_where('pickup_details', ['pickup_id' => $id])->result_array();
+
+        $pickup['detail'] = $pickup_detail;
+
+        $this->set_response(
+            [
+                'status' => true,
+                'data' => $pickup
+            ],
+            REST_Controller::HTTP_BAD_REQUEST
+        );
 
     }
 
@@ -297,5 +363,25 @@ class Users extends REST_Controller
             ],
             REST_Controller::HTTP_OK
         );
+    }
+
+    public function trash()
+    {
+        $items = $this->db->get('trash')->result_array();
+
+        $data = [];
+        foreach ($items as $item)
+        {
+            $value = $item;
+            $value['image_path'] = site_url('uploads/'. $item['image']);
+
+            $data[] = $value;
+        }
+
+        $return = [
+            'status' => true,
+            'data' => $data
+        ];
+        $this->set_response($return, REST_Controller::HTTP_OK);
     }
 }

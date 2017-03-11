@@ -63,14 +63,20 @@ $route['translate_uri_dashes'] = TRUE;
 
 $route['user/login'] = "Users/login";
 $route['user/(:num)'] = "Users/by_id/$1";
-$route['user/pickup/(:num)'] = "Users/pickup/$1";
+$route['user/pickup/'] = "Users/pickup";
+$route['user/pickup-lists'] = "Users/pickups/$1";
+$route['user/pickup/detail'] = "Users/pickup_detail/$1";
 $route['user/merchandise'] = "Users/merchandise";
 $route['user/redeem'] = "Users/redeem";
 $route['user/redeems'] = "Users/redeems";
 $route['user/change-balance'] = "Users/change_balance";
 
+$route['agent/login'] = "Agent/login";
+$route['agent/(:num)'] = "Agent/by_id/$1";
 $route['agent/deposit'] = "Agent/deposit";
 $route['agent/pickup-lists'] = "Agent/pickup_lists";
 
+$route['agent/transfer'] = "Agent/transfer";
 
-$route['transfer'] = "Users/transfer";
+
+$route['trash'] = "Users/trash";
