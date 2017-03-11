@@ -247,8 +247,8 @@ class Users extends REST_Controller
 
     public function redeem_post()
     {
-        $this->form_validation->set_rules('user_id', 'No Telepon', 'trim|required|integer');
-        $this->form_validation->set_rules('merchandise_id', 'No Telepon', 'trim|required|integer');
+        $this->form_validation->set_rules('user_id', 'User', 'trim|required|integer');
+        $this->form_validation->set_rules('merchandise_id', 'Merchandise', 'trim|required|integer');
         $this->form_validation->set_rules('pin', 'PIN', 'required');
 
         if ($this->form_validation->run() == FALSE)
@@ -316,7 +316,12 @@ class Users extends REST_Controller
 
     public function redeems_get($id)
     {
-        $items = $this->db->get_where('redeems', ['user_id' => $id])->result_array();
+
+        $this->db->from('redeems r');
+        $this->db->join('merchandise m', 'm.merchandise_id = r.merchandise_id');
+        $this->db->join('users u', 'u.user_id = r.user_id');
+        $this->db->where('user_id', $id);
+        $items = $this->db->get()->result_array();
 
         $return = [
             'status' => true,
