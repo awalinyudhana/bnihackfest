@@ -71,7 +71,7 @@ $route['user/merchandise'] = "Users/merchandise";
 $route['user/redeem'] = "Users/redeem";
 $route['user/redeems/(:num)'] = "Users/redeems/$1";
 $route['user/withdrawal'] = "Users/withdrawal";
-$route['user/withdrawals-pending/(:num)'] = "Agent/withdrawal_pending_lists_lists/$1";
+$route['user/withdrawals-pending/(:num)'] = "Users/withdrawal_pending_lists/$1";
 
 
 
