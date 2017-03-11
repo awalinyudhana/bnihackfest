@@ -182,9 +182,10 @@ class Agent extends REST_Controller
                 REST_Controller::HTTP_OK
             );
 
-        $this->db->update('withdrawals', ['status'=> true, 'commission' => 1000], ['withdrawal_id' => $id]);
+        $commission = (int) $withdrawal->amount * 0.1 ;
 
-        $commission = (int) $withdrawal->amount * 1000 ;
+        $this->db->update('withdrawals', ['status'=> true, 'commission' => $commission], ['withdrawal_id' => $id]);
+
         $user_new_amount = (int) $user->balance - (int) $withdrawal->amount;
         $agent_new_amount = (int) $agent->balance + $commission;
         $this->db->update('users', ['balance' => (int) $user_new_amount], ['user_id' => $user->user_id]);
