@@ -450,4 +450,19 @@ class Users extends REST_Controller
         );
 
     }
+
+
+    public function withdrawal_pending_lists_get($id)
+    {
+        $this->db->from('withdrawals w');
+        $this->db->join('users u', 'u.user_id = w.user_id');
+        $this->db->where('user_id', $id);
+        $this->db->where('status', FALSE);
+        $data = $this->db->get()->result_array();
+        $return = [
+            'status' => true,
+            'data' => $data
+        ];
+        $this->set_response($return, REST_Controller::HTTP_OK);
+    }
 }

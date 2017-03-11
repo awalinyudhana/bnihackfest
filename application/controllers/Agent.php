@@ -132,7 +132,11 @@ class Agent extends REST_Controller
 
     public function withdrawal_done_lists_get($id)
     {
-        $data = $this->db->get_where('withdrawals', ['status' => true, 'agent_id' => $id])->result_array();
+        $this->db->from('withdrawals w');
+        $this->db->join('users u', 'u.user_id = w.user_id');
+        $this->db->where('agent_id', $id);
+        $this->db->where('status', true);
+        $data = $this->db->get()->result_array();
         $return = [
             'status' => true,
             'data' => $data
