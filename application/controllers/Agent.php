@@ -248,9 +248,12 @@ class Agent extends REST_Controller
                 REST_Controller::HTTP_OK
             );
 
-        $price = $trash->price;
-        $total = (int) $price * (float) $weight;
+        $price = (int) $trash->price;
+        $weight = (float) $weight;
+        $total = $price * $weight;
+
         $commission = 0.08 * $total;
+
         $point = floor($total/1000);
 
         $biaya = 0.02 * $total;
@@ -294,6 +297,7 @@ class Agent extends REST_Controller
             'price' => $price,
             'weight' => $weight,
             'total' => $total,
+            'commission' => $commission,
             'point' => $point,
         ];
 
@@ -306,8 +310,8 @@ class Agent extends REST_Controller
                 'trash_price' => $price,
                 'trash_weight' => $weight,
                 'trash_value' => $total,
-                'commission' => $commission,
-                'transfer_balance' => $total - $commission
+                'cost' => $commission + $biaya,
+                'transfered_balance' => $total - $commission
             ],
             REST_Controller::HTTP_OK
         );
