@@ -325,6 +325,9 @@ class Agent extends REST_Controller
 
         $this->db->insert('collects', $data);
 
+
+        $this->db->delete('pickups', array('user_id' => $user->user_id));
+
         $this->set_response(
             [
                 'status' => true,

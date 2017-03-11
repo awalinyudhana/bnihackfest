@@ -86,17 +86,17 @@ class Users extends REST_Controller
 
         $pickup_id = $this->db->insert_id();;
 
-        $trash = $this->input->post('trash_id');
-
-        foreach ($trash as $item)
-        {
-            $pickup_detail = [
-                'pickup_id' => $pickup_id,
-                'trash_id' => $item
-            ];
-
-            $this->db->insert('pickups_detail ', $pickup_detail);
-        }
+//        $trash = $this->input->post('trash_id');
+//
+//        foreach ($trash as $item)
+//        {
+//            $pickup_detail = [
+//                'pickup_id' => $pickup_id,
+//                'trash_id' => $item
+//            ];
+//
+//            $this->db->insert('pickups_detail ', $pickup_detail);
+//        }
 
         $return = [
             'status' => true,
@@ -107,13 +107,19 @@ class Users extends REST_Controller
 
     }
 
-    public function pickups_get($id)
+    public function pickup_status_get($id)
     {
-
         $data = $this->db->get_where('pickups', ['user_id' => $id])->result_array();
+
+        if (is_null($data))
+            $this->set_response(
+                [
+                    'status' => false
+                ],
+                REST_Controller::HTTP_OK);
+
         $return = [
-            'status' => true,
-            'data' => $data
+            'status' => true
         ];
         $this->set_response($return, REST_Controller::HTTP_OK);
 
