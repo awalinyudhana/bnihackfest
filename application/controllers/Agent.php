@@ -346,8 +346,8 @@ class Agent extends REST_Controller
                 ],
                 REST_Controller::HTTP_BAD_REQUEST
             );
-        
-        $user = $this->db->get_where('users', ['user_id' => $this->input->post('phone')])->row_array();
+
+        $user = $this->db->get_where('users', ['phone' => $this->input->post('phone')])->row_array();
         $user['profile_path'] = site_url('uploads/'. $user['profile']);
 
         $return = [
