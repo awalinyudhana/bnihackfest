@@ -76,7 +76,11 @@ $route['user/withdrawal'] = "Users/withdrawal";
 $route['agent/login'] = "Agent/login";
 $route['agent/(:num)'] = "Agent/by_id/$1";
 $route['agent/deposit'] = "Agent/deposit";
-$route['agent/pickup-lists'] = "Agent/pickup_lists";
+$route['agent/pickup-lists/(:num)'] = "Agent/pickup_lists/$1";
+$route['agent/withdrawals-pending'] = "Agent/withdrawal_pending_lists";
+$route['agent/withdrawals-done'] = "Agent/withdrawal_done_lists";
+$route['agent/withdrawal'] = "Agent/withdrawal";
+$route['agent/collect'] = "Agent/collect";
 
 $route['agent/transfer'] = "Agent/transfer";
 

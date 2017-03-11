@@ -78,6 +78,7 @@ class Users extends REST_Controller
 
         $pickup = [
             'user_id' => $id,
+            'agent_id' => $this->input->post('agent_id'),
             'status' => FALSE
         ];
 
@@ -112,7 +113,7 @@ class Users extends REST_Controller
         $data = $this->db->get_where('pickups', ['user_id' => $id])->result_array();
         $return = [
             'status' => true,
-            'pickup_id' => $data
+            'data' => $data
         ];
         $this->set_response($return, REST_Controller::HTTP_OK);
 
