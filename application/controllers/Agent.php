@@ -297,7 +297,7 @@ class Agent extends REST_Controller
             'point' => $point,
         ];
 
-        $total->db->insert('collects', $data);
+        $this->db->insert('collects', $data);
 
         $this->set_response(
             [
