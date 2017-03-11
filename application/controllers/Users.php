@@ -391,6 +391,7 @@ class Users extends REST_Controller
     public function withdrawal_post(){
 
         $this->form_validation->set_rules('amount', 'Jumlah Tarik Tunai', 'required|integer');
+        $this->form_validation->set_rules('pin', 'PIN', 'required');
 
         if ($this->form_validation->run() == FALSE)
             $this->set_response(
@@ -404,10 +405,12 @@ class Users extends REST_Controller
 
         $user_id = $this->input->post('user_id');
         $amount = $this->input->post('amount');
+        $pin = $this->input->post('pin');
 
 
         $user = $this->db->get_where('users', [
-            'user_id' => $user_id
+            'user_id' => $user_id,
+            'pin' => $pin
         ])->row();
 
         if (is_null($user))
