@@ -366,22 +366,13 @@ class Users extends REST_Controller
         );
     }
 
-    public function trash()
+    public function trash_get()
     {
         $items = $this->db->get('trash')->result_array();
 
-        $data = [];
-        foreach ($items as $item)
-        {
-            $value = $item;
-            $value['image_path'] = site_url('uploads/'. $item['image']);
-
-            $data[] = $value;
-        }
-
         $return = [
             'status' => true,
-            'data' => $data
+            'data' => $items
         ];
         $this->set_response($return, REST_Controller::HTTP_OK);
     }

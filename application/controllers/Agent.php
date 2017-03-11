@@ -77,7 +77,12 @@ class Agent extends REST_Controller
         $this->db->where('agent_id', $id);
         $items = $this->db->get()->result_array();
 
-        $this->set_response($items, REST_Controller::HTTP_OK);
+        $return = [
+            'status' => true,
+            'data' => $items
+        ];
+
+        $this->set_response($return, REST_Controller::HTTP_OK);
     }
 
     public function deposit()
