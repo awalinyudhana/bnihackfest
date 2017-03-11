@@ -61,4 +61,16 @@ $route['translate_uri_dashes'] = TRUE;
 //$route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
 //$route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
 
+$route['user/login'] = "Users/login";
 $route['user/(:num)'] = "Users/by_id/$1";
+$route['user/pickup/(:num)'] = "Users/pickup/$1";
+$route['user/merchandise'] = "Users/merchandise";
+$route['user/redeem'] = "Users/redeem";
+$route['user/redeems'] = "Users/redeems";
+$route['user/change-balance'] = "Users/change_balance";
+
+$route['agent/deposit'] = "Agent/deposit";
+$route['agent/pickup-lists'] = "Agent/pickup_lists";
+
+
+$route['transfer'] = "Users/transfer";

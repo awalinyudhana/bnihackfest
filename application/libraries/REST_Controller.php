@@ -761,7 +761,7 @@ abstract class REST_Controller extends CI_Controller {
      */
     public function set_response($data = NULL, $http_code = NULL)
     {
-        $this->response($data, $http_code, TRUE);
+        $this->response($data, $http_code, FALSE);
     }
 
     /**
