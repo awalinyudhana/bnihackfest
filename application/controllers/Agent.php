@@ -104,9 +104,9 @@ class Agent extends REST_Controller
 
     }
 
-    public function withdrawal_pending_lists_get()
+    public function withdrawal_pending_lists_get($id)
     {
-        $data = $this->db->get_where('withdrawals', ['status' => false])->result_array();
+        $data = $this->db->get_where('withdrawals', ['status' => false, 'agent_id' => $id])->result_array();
         $return = [
             'status' => true,
             'data' => $data
@@ -114,9 +114,9 @@ class Agent extends REST_Controller
         $this->set_response($return, REST_Controller::HTTP_OK);
     }
 
-    public function withdrawal_done_lists_get()
+    public function withdrawal_done_lists_get($id)
     {
-        $data = $this->db->get_where('withdrawals', ['status' => true])->result_array();
+        $data = $this->db->get_where('withdrawals', ['status' => true, 'agent_id' => $id])->result_array();
         $return = [
             'status' => true,
             'data' => $data
