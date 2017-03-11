@@ -142,7 +142,8 @@ class Agent extends REST_Controller
         $pin = $this->input->post('pin');
 
         $withdrawal = $this->db->get_where('withdrawals', [
-            'withdrawal_id' => $id
+            'withdrawal_id' => $id,
+            'status' => false
         ])->row();
 
         if (is_null($withdrawal))
@@ -183,8 +184,9 @@ class Agent extends REST_Controller
 
         $this->db->update('withdrawals', ['status'=> true, 'commission' => 1000], ['withdrawal_id' => $id]);
 
+        $commission = (int) $withdrawal->amount * 1000 ;
         $user_new_amount = (int) $user->balance - (int) $withdrawal->amount;
-        $agent_new_amount = (int) $agent->balance + (int) $withdrawal->amount + 1000;
+        $agent_new_amount = (int) $agent->balance + $commission;
         $this->db->update('users', ['balance' => (int) $user_new_amount], ['user_id' => $user->user_id]);
         $this->db->update('agents', ['balance' => $agent_new_amount], ['agent_id' => $agent->agent_id]);
 
@@ -192,7 +194,7 @@ class Agent extends REST_Controller
             [
                 'status' => true,
                 'balance' => $agent_new_amount,
-                'commission' => 1000
+                'commission' => $commission
             ],
             REST_Controller::HTTP_OK
         );
