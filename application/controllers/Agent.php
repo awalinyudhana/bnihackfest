@@ -279,9 +279,10 @@ class Agent extends REST_Controller
                 ],
                 REST_Controller::HTTP_OK
             );
+        $cost = (int) ($commission + $biaya);
+        $transfer_balance = (int) $total - $cost;
 
-        $user_new_amount = (int) $user->balance + (int) ($total - (int) ($commission + $biaya));
-
+        $user_new_amount = (int) $user->balance + $transfer_balance);
 
         $user_new_point = (int) $user->point + (int) $point;
 
@@ -310,8 +311,8 @@ class Agent extends REST_Controller
                 'trash_price' => $price,
                 'trash_weight' => $weight,
                 'trash_value' => $total,
-                'cost' => $commission + $biaya,
-                'transfered_balance' => $total - $commission
+                'cost' => $cost,
+                'transfered_balance' => $transfer_balance
             ],
             REST_Controller::HTTP_OK
         );
