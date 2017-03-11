@@ -456,7 +456,7 @@ class Users extends REST_Controller
     {
         $this->db->from('withdrawals w');
         $this->db->join('users u', 'u.user_id = w.user_id');
-        $this->db->where('user_id', $id);
+        $this->db->where('w.user_id', $id);
         $this->db->where('status', FALSE);
         $data = $this->db->get()->result_array();
         $return = [
