@@ -109,7 +109,7 @@ class Users extends REST_Controller
 
     public function pickup_status_get($id)
     {
-        $data = $this->db->get_where('pickups', ['user_id' => $id])->result_array();
+        $data = $this->db->get_where('pickups', ['user_id' => $id, 'status' => FALSE])->row_array();
 
         if (is_null($data))
             $this->set_response(
