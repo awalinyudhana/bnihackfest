@@ -320,7 +320,7 @@ class Users extends REST_Controller
         $this->db->from('redeems r');
         $this->db->join('merchandise m', 'm.merchandise_id = r.merchandise_id');
         $this->db->join('users u', 'u.user_id = r.user_id');
-        $this->db->where('user_id', $id);
+        $this->db->where('r.user_id', $id);
         $items = $this->db->get()->result_array();
 
         $return = [
