@@ -65,8 +65,8 @@ $route['user/login'] = "Users/login";
 $route['user/(:num)'] = "Users/by_id/$1";
 
 $route['user/pickup'] = "Users/pickup";
-$route['user/pickup-status/(:num)'] = "Users/pickups/$1";
-$route['user/pickup/detail'] = "Users/pickup_detail/$1";
+$route['user/pickup-status/(:num)'] = "Users/pickup_status/$1";
+//$route['user/pickup/detail'] = "Users/pickup_detail/$1";
 $route['user/merchandise'] = "Users/merchandise";
 $route['user/redeem'] = "Users/redeem";
 $route['user/redeems'] = "Users/redeems";
