@@ -438,6 +438,7 @@ class Users extends REST_Controller
         $this->db->insert('withdrawals', [
             'user_id' => $user_id,
             'status' => false,
+            'amount' => $amount,
             'code' => $code,
         ]);
 

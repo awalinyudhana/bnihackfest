@@ -72,8 +72,7 @@ $route['user/redeem'] = "Users/redeem";
 $route['user/redeems/(:num)'] = "Users/redeems/$1";
 $route['user/withdrawal'] = "Users/withdrawal";
 $route['user/withdrawals-pending/(:num)'] = "Users/withdrawal_pending_lists/$1";
-
-
+$route['trash'] = "Users/trash";
 
 $route['user/change-balance'] = "Users/change_balance";
 $route['user/transfer'] = "Users/transfer";
@@ -92,4 +91,3 @@ $route['agent/collect-history/(:num'] = "Agent/collect_history/$1";
 $route['agent/user-by-phone'] = "Agent/user_by_phone";
 
 
-$route['trash'] = "Users/trash";
