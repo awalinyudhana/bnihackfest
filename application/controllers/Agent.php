@@ -226,7 +226,7 @@ class Agent extends REST_Controller
     public function collect_post()
     {
         $this->form_validation->set_rules('pin', 'PIN', 'required');
-        $this->form_validation->set_rules('phone', 'No Telepon', 'trim|required|is_natural');
+        $this->form_validation->set_rules('user_id', 'User', 'trim|required|is_natural');
         $this->form_validation->set_rules('trash_id', 'Sampah', 'trim|required|integer');
         $this->form_validation->set_rules('agent_id', 'Agent', 'trim|required|integer');
         $this->form_validation->set_rules('weight', 'Agent', 'trim|required|numeric');
@@ -240,14 +240,14 @@ class Agent extends REST_Controller
                 REST_Controller::HTTP_BAD_REQUEST
             );
 
-        $phone = $this->input->post('phone');
+        $user_id = $this->input->post('user_id');
         $pin = $this->input->post('pin');
         $trash_id = $this->input->post('trash_id');
         $weight = $this->input->post('weight');
         $agent_id = $this->input->post('agent_id');
 
         $user = $this->db->get_where('users', [
-            'phone' => $phone,
+            'user_id' => $user_id,
             'pin' => $pin
         ])->row();
 
