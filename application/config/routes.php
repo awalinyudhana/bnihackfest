@@ -87,7 +87,7 @@ $route['agent/withdrawals-done/(:num)'] = "Agent/withdrawal_done_lists/$1";
 $route['agent/withdrawal-by-code/(:num)'] = "Agent/withdrawal_by_code/$1";
 $route['agent/withdrawal'] = "Agent/withdrawal";
 $route['agent/collect'] = "Agent/collect";
-$route['agent/collect-history/(:num'] = "Agent/collect_history/$1";
+$route['agent/collect-history/(:num)'] = "Agent/collect_history/$1";
 $route['agent/user-by-phone'] = "Agent/user_by_phone";
 
 
