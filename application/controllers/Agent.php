@@ -226,9 +226,9 @@ class Agent extends REST_Controller
     public function collect_post()
     {
         $this->form_validation->set_rules('pin', 'PIN', 'required');
-        $this->form_validation->set_rules('user_id', 'User', 'trim|required|is_natural');
-        $this->form_validation->set_rules('trash_id', 'Sampah', 'trim|required|integer');
-        $this->form_validation->set_rules('agent_id', 'Agent', 'trim|required|integer');
+//        $this->form_validation->set_rules('user_id', 'User', 'trim|required|integer');
+//        $this->form_validation->set_rules('trash_id', 'Sampah', 'trim|required|integer');
+//        $this->form_validation->set_rules('agent_id', 'Agent', 'trim|required|integer');
         $this->form_validation->set_rules('weight', 'Agent', 'trim|required|numeric');
 
         if ($this->form_validation->run() == FALSE)
